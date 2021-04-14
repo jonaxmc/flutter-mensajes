@@ -1,5 +1,6 @@
 import 'package:app_mensajes/helpers/mostrar_alerta.dart';
 import 'package:app_mensajes/services/auth_service.dart';
+import 'package:app_mensajes/services/socket_service.dart';
 import 'package:app_mensajes/widgets/boton_azul.dart';
 import 'package:app_mensajes/widgets/custom_input.dart';
 import 'package:app_mensajes/widgets/labels.dart';
@@ -53,6 +54,8 @@ class _FormState extends State<Form> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    final socketService = Provider.of<SocketService>(context);
+
     return Container(
       margin: EdgeInsets.only(top: 40),
       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -81,7 +84,8 @@ class _FormState extends State<Form> {
                         emailCtrl.text.trim(), passCtrl.text.trim());
 
                     if (loginOk) {
-                      // TODO: Conectar a nuestro socket server
+                      socketService
+                          .connect(); //conectarse al socket cuando inicia sesion
                       Navigator.pushReplacementNamed(context, 'usuarios');
                     } else {
                       // Mostara alerta

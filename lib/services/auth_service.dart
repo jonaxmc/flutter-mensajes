@@ -21,13 +21,6 @@ class AuthService with ChangeNotifier {
     notifyListeners();
   }
 
-  //Getters token forma estatica
-  // static Future<String> getToken() async {
-  //   final _storage = new FlutterSecureStorage();
-  //   final token = await _storage.read(key: 'token');
-  //   return token;
-  // }
-  //
   static Future<String> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString('token');
